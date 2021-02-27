@@ -16,7 +16,7 @@ $font-text: 'Source Sans Pro', sans-serif;
 }
 
 body {
-  background: $color-light;
+  background-color:#ced6e0;
   font-family: $font-text;
   color: $color-dark;
   font-weight: 300;
@@ -30,6 +30,7 @@ body {
 }
 
 .section-title {
+  color: #8c7ae6;
   font-size: 22px;
   text-transform: uppercase;
   font-family: $font-header;
@@ -57,21 +58,22 @@ body {
 }
 
 .sidebar, .posts {
-  background: $color-light;
+  background: #dfe4ea;
   margin-right: 10px;
   padding: 40px;
   border: 1px solid $color-dark;
-  border-radius: 5px;
 }
 
 /* Logo */
 
 .logo {
+  color: #8c7ae6;
   font-family: $font-logo;
   font-weight: 400;
   font-size: 104px;
   line-height: 1;
   text-align: center;
+  margin: 50px;
 }
 
 /* Lists */
@@ -103,6 +105,7 @@ body {
 
 .post {
   display: none;
+  color: #192a56;
   &.active {
     display: block;
   }

@@ -6,7 +6,7 @@
 }
 
 body {
-  background: #fff;
+  background-color: #ced6e0;
   font-family: "Source Sans Pro", sans-serif;
   color: #444;
   font-weight: 300;
@@ -20,6 +20,7 @@ body {
 }
 
 .section-title {
+  color: #8c7ae6;
   font-size: 22px;
   text-transform: uppercase;
   font-family: "Oswald", sans-serif;
@@ -50,20 +51,21 @@ body {
 }
 
 .sidebar, .posts {
-  background: #fff;
+  background: #dfe4ea;
   margin-right: 10px;
   padding: 40px;
   border: 1px solid #444;
-  border-radius: 5px;
 }
 
 /* Logo */
 .logo {
+  color: #8c7ae6;
   font-family: "Sacramento", cursive;
   font-weight: 400;
   font-size: 104px;
   line-height: 1;
   text-align: center;
+  margin: 50px;
 }
 
 /* Lists */
@@ -89,6 +91,7 @@ body {
 /* Post */
 .post {
   display: none;
+  color: #192a56;
 }
 
 .post.active {
