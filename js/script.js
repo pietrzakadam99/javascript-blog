@@ -43,10 +43,6 @@ const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles';
 
-  function clearMessages(){
-    document.getElementById('messages').innerHTML = titleList;
-  }
-
 function generateTitleLinks(){
 
   /* remove contents of titleList */
