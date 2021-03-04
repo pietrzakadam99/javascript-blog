@@ -30,6 +30,8 @@ body { background-color: #ced6e0; font-family: "Source Sans Pro", sans-serif; co
 
 .list-horizontal li { display: inline-block; }
 
+.list-horizontal a { padding: 0 5px; }
+
 /* Authors */
 .authors li { margin-bottom: 12px; }
 
