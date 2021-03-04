@@ -110,7 +110,7 @@ function generateTags(){
     for(let tag of articleTagsArray){
 
   /* generate HTML of the link */
-    const linkHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
+  const linkHTML = '<li><a href="#tag- ' + tag + '">' + tag + '</a></li>' + '  ';
     console.log(linkHTML);
 
   /* add generated code to html variable */
@@ -168,7 +168,7 @@ function tagClickHandler(event){
 
 function addClickListenersToTags(){
   /* find all links to tags */
-  const tagLinks = document.querySelectorAll('.post-tags .list a');
+  const tagLinks = document.querySelectorAll('.post-tags a');
   
   /* START LOOP: for each link */
   for (let tagLink of tagLinks){
@@ -194,7 +194,7 @@ const articles = document.querySelectorAll(optArticleSelector);
     /* get tags from author-tags attribute */
     const articleAuthors = article.getAttribute('data-author');
     /* generate HTML of the link */
-    const linkHTML = '<li><a href="#author-' + author + '"<span>' + author + '</span></a></li>';
+    const linkHTML = '<a href="#author-' + articleAuthors + '">' + articleAuthors + '</a>';
     /* add generated code to html variable */
     html = html + linkHTML;
     /* insert HTML of all the links into the tags wrapper */
