@@ -227,7 +227,25 @@ function addClickListenersToTags(){
 addClickListenersToTags();
 
 //// CALCULATE AUTHORS PARAMS /////
-function calculateAuthorsParams(count, params){
+function calculateAuthorsParams(authors){
+
+  const params = {max: 0, min: 9999};
+
+  for(let author in authors){
+
+    if(authors[author] > params.max){
+      params.max = authors[author];
+    } 
+    else if (authors[author] < params.min){
+      params.min = authors[author];
+    } 
+  }
+  return params;
+}
+
+//// CALCULATE AUTHOR CLASS //////
+
+function calculateAuthorClass(count, params){
 
   const classNumber = Math.floor( ( (count - params.min) / (params.max - params.min) ) * optCloudClassCount + 1 );
 
@@ -237,6 +255,8 @@ function calculateAuthorsParams(count, params){
 ////GENERATE AUTHORS //////
 
 function generateAuthors(){
+  /* [NEW] create a new variable allAuthors with an empty object */
+  let allAuthors = {};
   /* find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
   /* START LOOP: for every article: */
@@ -249,13 +269,32 @@ function generateAuthors(){
     // const articleAuthor = article.getAttribute('data-author');
     const articleAuthors = article.getAttribute('data-author');
     /* generate HTML of the link */
-    const linkHTML = '<a href="#author' + articleAuthors + '">' + articleAuthors + '</a>';
+    const linkHTML = '<a href="#author-' + articleAuthors + '">' + articleAuthors + '</a>';
     /* add generated code to html variable */
     html = html + linkHTML;
     /* insert HTML of all the links into the tags wrapper */
     authorList.innerHTML = html;
   /* END LOOP: for every article: */
+    if(!allAuthors.hasOwnProperty(articleAuthors)){
+      allAuthors[articleAuthors] = 1;
+    }else{
+      allAuthors[articleAuthors]++;
+    } 
   }
+
+  const authorList = document.querySelector('.authors');
+
+  const authorsParams = calculateAuthorsParams(allAuthors);
+  console.log('authorsParams:', authorsParams);
+
+  let allAuthorsHTML = '';
+
+  for(let author in allAuthors){
+
+    allAuthorsHTML += '<li><a href="#author-' + author + '" class="' + calculateAuthorClass(allAuthors[author], authorsParams) + '">' + author + ' (' + allAuthors[author] + ') ' + '</a></li>';
+
+  }  
+  authorList.innerHTML = allAuthorsHTML;
 }
 
 generateAuthors(); 
