@@ -114,7 +114,7 @@ function calculateTagClass(count, params){
 
 function generateTags(){
   /* [NEW] create a new variable allTags with an empty object */
-  let allTags = {};
+  let allTags = [];
   /* find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
 
@@ -142,10 +142,10 @@ function generateTags(){
       /* add generated code to html variable */
       html = html + linkHTML;
       /* [NEW] check if this link is NOT already in allTags */
-      if(!allTags.hasOwnProperty(tag)){
+      if(!allTags[tag]){
         allTags[tag] = 1;
-        } else {
-      allTags[tag]++;
+      } else {
+        allTags[tag]++;
       }
       /* END LOOP: for each tag */
     }
@@ -154,7 +154,7 @@ function generateTags(){
     articleTag.innerHTML = html;
   
     /* END LOOP: for every article: */
-    }
+  }
   /* [NEW] find list of tags in right column */
   const tagList = document.querySelector('.tags');
   const tagsParams = calculateTagsParams(allTags);
@@ -166,7 +166,7 @@ function generateTags(){
     const tagLinkHTML = '<li><a class="' + calculateTagClass(allTags[tag], tagsParams) + '" href="#tag-' + tag + '">' + tag + '</a></li>' + '    '; 
 
     allTagsHTML += tagLinkHTML;
-      /* [NEW] END LOOP: for each tag in allTags: */
+    /* [NEW] END LOOP: for each tag in allTags: */
   }
   tagList.innerHTML = allTagsHTML;
 }
@@ -272,8 +272,8 @@ function generateAuthors(){
     html = html + linkHTML;
     /* insert HTML of all the links into the tags wrapper */
     authorList.innerHTML = html;
-  /* END LOOP: for every article: */
-    if(!allAuthors.hasOwnProperty(articleAuthors)){
+    /* END LOOP: for every article: */
+    if(!allAuthors[articleAuthors]){
       allAuthors[articleAuthors] = 1;
     }else{
       allAuthors[articleAuthors]++;
