@@ -44,7 +44,6 @@ const optArticleSelector = '.post',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
   optArticleAuthorSelector = '.post-author',
-  optTagsListSelector = '.tags.list',
   optCloudClassCount = 5,
   optCloudClassPrefix = 'tag-size-';
 
@@ -144,10 +143,9 @@ function generateTags(){
       html = html + linkHTML;
       /* [NEW] check if this link is NOT already in allTags */
       if(!allTags.hasOwnProperty(tag)){
-
         allTags[tag] = 1;
         } else {
-        allTags[tag]++;
+      allTags[tag]++;
       }
       /* END LOOP: for each tag */
     }
@@ -157,20 +155,20 @@ function generateTags(){
   
     /* END LOOP: for every article: */
     }
-    /* [NEW] find list of tags in right column */
-    const tagList = document.querySelector('.tags');
-    const tagsParams = calculateTagsParams(allTags);
-    /* [NEW] create variable for all links HTML code */
-    let allTagsHTML = '';
-    /* [NEW] START LOOP: for each tag in allTags: */
-    for(let tag in allTags){
-     // allTagsHTML += '<a href="#tag-'+ tag + '">' + tag + ' (' + allTags[tag] + ') ' + '</a>';
-     const tagLinkHTML = '<li><a class="' + calculateTagClass(allTags[tag], tagsParams) + '" href="#tag-' + tag + '">' + tag + '</a></li>' + '    '; 
+  /* [NEW] find list of tags in right column */
+  const tagList = document.querySelector('.tags');
+  const tagsParams = calculateTagsParams(allTags);
+  /* [NEW] create variable for all links HTML code */
+  let allTagsHTML = '';
+  /* [NEW] START LOOP: for each tag in allTags: */
+  for(let tag in allTags){
+    // allTagsHTML += '<a href="#tag-'+ tag + '">' + tag + ' (' + allTags[tag] + ') ' + '</a>';
+    const tagLinkHTML = '<li><a class="' + calculateTagClass(allTags[tag], tagsParams) + '" href="#tag-' + tag + '">' + tag + '</a></li>' + '    '; 
 
     allTagsHTML += tagLinkHTML;
       /* [NEW] END LOOP: for each tag in allTags: */
-    }
-    tagList.innerHTML = allTagsHTML;
+  }
+  tagList.innerHTML = allTagsHTML;
 }
 
 generateTags();
