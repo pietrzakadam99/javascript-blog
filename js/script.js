@@ -5,7 +5,7 @@ const templates = {
   tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
   authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML),
   tagCloudLink: Handlebars.compile(document.querySelector('#template-tag-cloud-link').innerHTML),
-  authorListLink: Handlebars.compile(document.querySelector('#template-author-list-link').innerHTML),
+  authorCloudLink: Handlebars.compile(document.querySelector('#template-authorCloud-link').innerHTML),
 };
 
 function titleClickHandler(event){
@@ -264,6 +264,8 @@ function calculateAuthorClass(count, params){
   return optCloudClassPrefix + classNumber;
 }
 
+calculateAuthorClass();
+
 ////GENERATE AUTHORS //////
 
 function generateAuthors(){
@@ -274,26 +276,24 @@ function generateAuthors(){
   /* START LOOP: for every article: */
   for (let article of articles){
     /* find author wrapper */
-    const authorWrapper = article.querySelector(optArticleAuthorSelector);
+    const authorList = article.querySelector(optArticleAuthorSelector);
     /* make html variable with empty string */
     let html = '';
     /* get tags from author-tags attribute */
-    // const articleAuthor = article.getAttribute('data-author');
-    const articleAuthors = article.getAttribute('data-author');
+    const articleAuthor = article.getAttribute('data-author');
     /* generate HTML of the link */
     const linkHTMLData = {id: author, title: author};
     const linkHTML = templates.authorLink(linkHTMLData);
     /* add generated code to html variable */
     html = html + linkHTML;
-    /* insert HTML of all the links into the tags wrapper */
-    authorWrapper.innerHTML = html;
-    /* END LOOP: for every article: */
-    if(!allAuthors[articleAuthors]){
-      allAuthors[articleAuthors] = 1;
-    }else{
-      allAuthors[articleAuthors]++;
+    
+    if(!allAuthors[articleAuthor]){
+      allAuthors[articleAuthor] = 1;
+    }else{ 
+      allAuthors[articleAuthor]++;
     } 
-
+    /* insert HTML of all the links into the tags wrapper */
+    authorList.innerHTML = html;
   }
 
   const authorList = document.querySelector('.authors');
@@ -307,14 +307,14 @@ function generateAuthors(){
 
     //allAuthorsHTML += '<li><a href="#author-' + author + '" class="' + calculateAuthorClass(allAuthors[author], authorsParams) + '">' + author + ' (' + allAuthors[author] + ') ' + '</a></li>';
 
-    allAuthorsData.authors.push({
+    allAuthorsHTML.allAuthors.push({
       author: author,
       count: allAuthors[author],
-      className: calculateTagClass(allAuthors[author], authorsParams)
+      className: calculateAuthorClass(allAuthors[author], authorsParams)
     });
 
   }  
-  authorList.innerHTML = templates.authorListLink(allAuthorsData);
+  authorList.innerHTML = templates.authorCloudLink(allAuthorsHTML);
 }
 
 generateAuthors(); 
@@ -365,9 +365,9 @@ function addClickListenersToAuthors(){
   const authorLinks = document.querySelectorAll('a[href^="#author-"]');
   
   /* START LOOP: for each link */
-  for (let author of authorLinks){
+  for (let authorLink of authorLinks){
     /* add tagClickHandler as event listener for that link */
-    author.addEventListener('click', authorClickHandler);
+    authorLink.addEventListener('click', authorClickHandler);
   /* END LOOP: for each link */
   }
 }
