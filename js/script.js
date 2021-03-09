@@ -264,7 +264,6 @@ function calculateAuthorClass(count, params){
   return optCloudClassPrefix + classNumber;
 }
 
-calculateAuthorClass();
 
 ////GENERATE AUTHORS //////
 
@@ -299,15 +298,15 @@ function generateAuthors(){
   const authorList = document.querySelector('.authors');
 
   const authorsParams = calculateAuthorsParams(allAuthors);
-  console.log('authorsParams:', authorsParams);
 
   const allAuthorsData = {authors: []};
+  
 
   for(let author in allAuthors){
 
     //allAuthorsHTML += '<li><a href="#author-' + author + '" class="' + calculateAuthorClass(allAuthors[author], authorsParams) + '">' + author + ' (' + allAuthors[author] + ') ' + '</a></li>';
 
-    allAuthorsData.allAuthors.push({
+    allAuthorsData.authors.push({
       author: author,
       count: allAuthors[author],
       className: calculateAuthorClass(allAuthors[author], authorsParams)
